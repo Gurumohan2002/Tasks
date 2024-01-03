@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 from urllib.parse import quote
 
+#used encoded for the password since it contains the @ symbol in it
 password = "Guru@2607"
 encoded_password = quote(password)
 
@@ -13,6 +14,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 uploads = Blueprint('uploads', __name__)
 
 db = SQLAlchemy(app)
+
+# Student Class contains details of the student
 class students(db.Model):
     __tablename__ = 'Students'
     id = db.Column(db.Integer(), primary_key=True)
@@ -23,7 +26,8 @@ class students(db.Model):
     
 with app.app_context():
     db.create_all()
-    
+
+#API for adding students using JSON format and the user have to give the details of the student by using POST method
 @app.route('/addstudents', methods=['POST'])
 def add_students():
     try:
@@ -38,7 +42,8 @@ def add_students():
     
     except Exception as e:
         return jsonify({'error': f'An unexpected error occurred: {e}'}), 500
-    
+
+# API for displaying the students list which was given by the user using GET method
 @app.route('/showlist', methods=['GET'])
 def get_details():
     try:
@@ -50,7 +55,8 @@ def get_details():
     
     except Exception as e:
         return jsonify({'error': f'An unexpected error occurred: {e}'}), 500
-    
+
+#API for updating the details of the student using PUT method
 @app.route('/update/<int:id>',methods=['PUT'])
 def update_list(id):
     try:
@@ -74,6 +80,7 @@ def update_list(id):
     except Exception as e:
         return jsonify({'error': f'An unexpected error occurred: {e}'}), 500
 
+#API for deleting the student record using the input id given by the user in the URL using DELETE method
 @app.route('/delete/<int:id>', methods=['DELETE'])
 def delete_student(id):
     try:
@@ -88,5 +95,6 @@ def delete_student(id):
     except Exception as e:
         return jsonify({'error': f'An unexpected error occurred: {e}'}), 500
     
+#Main function
 if __name__ == '_main_':
     app.run(debug=True)

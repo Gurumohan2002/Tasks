@@ -2,6 +2,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+#API for WEB HomePage
 @app.route('/')
 def hello():
    try:
@@ -10,6 +11,7 @@ def hello():
       print(f"An error occurred: {e}")
       return "<html><body> <h1> An unexpected error occurred. </h1></body></html>"
 
+#API for squaring a number with GET and POST method
 @app.route('/sqrt', methods=['GET', 'POST'])
 def squarenumber():
    if request.method == 'POST':
@@ -29,6 +31,7 @@ def squarenumber():
    else:
       return 'wertyuio'
 
+#API for GET and POST
 @app.route('/g_p', methods=['GET', 'POST'])
 def example():
    try:
@@ -39,7 +42,8 @@ def example():
    except Exception as e:
       print(f"An error occured: {e}")
       return "<html><body><h1> An unexpected error occured. </h1></body></html>"
-   
+
+#API for GET method
 @app.route('/usersget', methods=['GET'])
 def get_users():
    try:
@@ -49,6 +53,7 @@ def get_users():
         print(f"An error occurred: {e}")
         return "<html><body> <h1> An unexpected error occurred. </h1></body></html>"
 
+#function for fetching data from the user
 def fetch_data(request):
    try:
       data=request.data
@@ -58,6 +63,7 @@ def fetch_data(request):
       print(f"An error ocuured : {e}")
       return f"<html><body> <h1> An unexpected error occurred.{None} </h1></body></html>"
 
+#API for POST method
 @app.route('/userspost', methods=['POST'])
 def post_users():
    if request.method=="POST":
@@ -73,6 +79,7 @@ def post_users():
    else:
       return f"<html><body><h1> An error occured </h1> </body></html>"
    
+#API for PUT method
 @app.route('/usersput', methods=['PUT'])
 def put_users():
    if request.method=="PUT":
@@ -87,6 +94,7 @@ def put_users():
          print(f"An error occured: {e}")
          return "<html><body></h1> An unexpected error occured </h1></body></html>"
 
+#API for DELETE method
 @app.route('/usersdelete', methods=['DELETE'])
 def delete_user():
    try:
@@ -100,6 +108,8 @@ def delete_user():
    except Exception as e:
        print(f"An error occurred: {e}")
        return "An unexpected error occurred."
-    
+
+
+#main function
 if(__name__ == "__main__"):
 	app.run(debug=True)

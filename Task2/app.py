@@ -4,6 +4,7 @@ from flask import Flask, render_template,request
 
 app=Flask(__name__)
 
+# API for WEB HomePage
 @app.route("/")
 def hello():
     try:
@@ -11,7 +12,8 @@ def hello():
     except Exception as e:
        print(f"An error occurred: {e}")
        return "<html><body> <h1> An unexpected error occurred. </h1></body></html>"
-  
+
+#API for inserting the data in postgresql table with database connections using POST method
 @app.route("/psqlcreate",methods=["POST"])
 def create():
     if request.method=="POST":
@@ -65,6 +67,7 @@ def create():
         print(f"An unexpected error occurred:")
         return "An unexpected error occurred."
         
+# API for getting the data from the database and Displaying the data from the Table using GET method      
 @app.route("/psqlshow",methods=["GET"])
 def show():
     if request.method=="GET":
@@ -94,6 +97,7 @@ def show():
     else:
         print(f"An unexpected error occurred:")
         return "An unexpected error occurred."
-    
+
+#Main function
 if __name__ == "__main__":
     app.run(debug=True)

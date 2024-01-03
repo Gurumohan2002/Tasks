@@ -5,9 +5,10 @@ app = Flask(__name__)
 def success():
    return 'welcome %s'  
 
+# API to check GET and POST method
 @app.route('/login',methods = ['POST', 'GET'])
 def login():
-   if request.method == ['GET','POST']:
+   if request.method == ['GET','POST']: 
       user = request.form['nm']
       return redirect(url_for('success'))
    else:

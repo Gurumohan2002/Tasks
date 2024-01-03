@@ -2,6 +2,8 @@ from flask import Flask,request,jsonify
 
 new=Flask(__name__)
 
+#API which gets data from the user and returns the respected output using GET and POST 
+# method for the bank withdrawal and deposit
 @new.route('/bank',methods=['POST','GET'])
 def bank():
     try:
@@ -24,5 +26,6 @@ def bank():
     except Exception as exp:
         return jsonify(f'The error in input : {str(exp)}')
     
+#Main function
 if __name__ == '__main__':
     new.run(debug=True)
